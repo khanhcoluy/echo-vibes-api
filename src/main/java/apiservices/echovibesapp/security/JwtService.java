@@ -3,10 +3,12 @@ package apiservices.echovibesapp.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Base64;
+import java.util.Date;
 import java.util.function.Function;
 
 @Service
@@ -34,5 +36,18 @@ public class JwtService {
     private Key getSigningKey() {
         byte[] decodedKey = Base64.getDecoder().decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(decodedKey);
+    }
+
+    public boolean isTokenValid(String jwtToken, UserDetails userDetails) {
+        String userName = extractUsername(jwtToken);
+        return userName.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+    }
+
+    private boolean isTokenExpired(String jwtToken) {
+        return extractExpiration(jwtToken).before(new Date());
+    }
+
+    private Date extractExpiration(String jwtToken) {
+        return extractClaim(jwtToken, Claims::getExpiration);
     }
 }
