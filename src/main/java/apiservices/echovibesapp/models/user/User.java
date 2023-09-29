@@ -1,9 +1,6 @@
 package apiservices.echovibesapp.models.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +20,7 @@ import java.util.List;
 @Table(name = "_user")
 public class User implements UserDetails {
     @Id
+    @GeneratedValue
     private Integer id;
 
     private String firstName;
@@ -33,7 +31,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override
