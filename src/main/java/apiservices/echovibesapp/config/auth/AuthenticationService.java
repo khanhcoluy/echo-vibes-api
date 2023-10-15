@@ -4,6 +4,7 @@ import apiservices.echovibesapp.models.user.Role;
 import apiservices.echovibesapp.models.user.User;
 import apiservices.echovibesapp.repository.UserRepository;
 import apiservices.echovibesapp.security.JwtService;
+import apiservices.echovibesapp.services.exception.EmailAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,9 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new EmailAlreadyExistsException("Email is already in use");
+        }
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
