@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/files")
 public class FilesController {
     private final S3Service s3Service;
 
