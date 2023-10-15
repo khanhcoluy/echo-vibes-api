@@ -1,6 +1,5 @@
 package apiservices.echovibesapp.config.aws;
 
-import apiservices.echovibesapp.utils.S3Util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,10 +31,5 @@ public class AwsConfig {
                 .build();
 
         return s3Client;
-    }
-
-    @Bean
-    public S3Util s3Util(S3Client s3Client) {
-        return new S3Util(bucketName, s3Client);
     }
 }
