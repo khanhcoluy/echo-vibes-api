@@ -1,6 +1,6 @@
 package apiservices.echovibesapp.controllers;
 
-import apiservices.echovibesapp.services.S3Service;
+import apiservices.echovibesapp.services.FileUploadService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,17 +12,17 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/v1/files")
 public class FilesController {
-    private final S3Service s3Service;
+    private final FileUploadService fileUploadService;
 
-    public FilesController(S3Service s3Service) {
-        this.s3Service = s3Service;
+    public FilesController(FileUploadService fileUploadService) {
+        this.fileUploadService = fileUploadService;
     }
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile[] files) {
         try {
             for (MultipartFile file : files) {
-                s3Service.uploadFile(file.getOriginalFilename(), file.getInputStream(), file.getSize());
+                fileUploadService.uploadFile(file);
             }
             return ResponseEntity.ok("File uploaded successfully");
         } catch (Exception e) {

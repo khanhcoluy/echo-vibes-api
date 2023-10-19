@@ -19,7 +19,7 @@ public class Song {
     private Artist artistId;
 
     @ManyToOne
-    @Column(name = "album_id")
+    @JoinColumn(name = "album_id")
     private Album albumId;
 
     @Column(name = "genre_id")
@@ -27,6 +27,14 @@ public class Song {
 
     @Column(name = "url")
     private String url;
+
+    public Song() {
+    }
+
+    public Song(String title, String url) {
+        this.title = title;
+        this.url = url;
+    }
 
     public Integer getId() {
         return id;

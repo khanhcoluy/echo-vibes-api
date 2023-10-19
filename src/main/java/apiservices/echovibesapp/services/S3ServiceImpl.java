@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 import java.io.InputStream;
 
@@ -20,12 +22,20 @@ public class S3ServiceImpl implements S3Service{
     }
 
     @Override
-    public void uploadFile(String fileName, InputStream inputStream, long contentLength) {
+    public String uploadFile(String fileName, InputStream inputStream, long contentLength) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(fileName)
                 .build();
 
-        s3Client.putObject(objectRequest, RequestBody.fromInputStream(inputStream, contentLength));
+        PutObjectResponse response = s3Client.putObject(objectRequest, RequestBody.fromInputStream(inputStream, contentLength));
+        // Extract the URL from the response
+        GetUrlRequest getUrlRequest = GetUrlRequest.builder()
+                .bucket(bucketName)
+                .key(fileName)
+                .build();
+        String url = s3Client.utilities().getUrl(getUrlRequest).toString();
+
+        return url;
     }
 }
