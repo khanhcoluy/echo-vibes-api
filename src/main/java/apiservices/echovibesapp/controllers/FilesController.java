@@ -19,10 +19,16 @@ public class FilesController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile[] files) {
+    public ResponseEntity<String> uploadFile(
+            @RequestParam("file") MultipartFile[] files,
+            @RequestParam("title") String title,
+            @RequestParam("artistId") Integer artistId,
+            @RequestParam("albumId") Integer albumId,
+            @RequestParam("genreId") Integer genreId
+    ) {
         try {
             for (MultipartFile file : files) {
-                fileUploadService.uploadFile(file);
+                fileUploadService.uploadFile(file, title, artistId, albumId, genreId);
             }
             return ResponseEntity.ok("File uploaded successfully");
         } catch (Exception e) {

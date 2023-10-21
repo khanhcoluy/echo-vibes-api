@@ -14,27 +14,17 @@ public class Song {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "artist_id")
-    private Artist artistId;
+    @Column(name = "artist_id")
+    private Integer artistId;
 
-    @ManyToOne
-    @JoinColumn(name = "album_id")
-    private Album albumId;
+    @Column(name = "album_id")
+    private Integer albumId;
 
     @Column(name = "genre_id")
     private Integer genreId;
 
     @Column(name = "url")
     private String url;
-
-    public Song() {
-    }
-
-    public Song(String title, String url) {
-        this.title = title;
-        this.url = url;
-    }
 
     public Integer getId() {
         return id;
@@ -48,19 +38,19 @@ public class Song {
         this.title = title;
     }
 
-    public Artist getArtistId() {
+    public Integer getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Artist artistId) {
+    public void setArtistId(Integer artistId) {
         this.artistId = artistId;
     }
 
-    public Album getAlbumId() {
+    public Integer getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(Album albumId) {
+    public void setAlbumId(Integer albumId) {
         this.albumId = albumId;
     }
 

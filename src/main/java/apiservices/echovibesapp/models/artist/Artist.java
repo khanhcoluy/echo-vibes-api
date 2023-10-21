@@ -3,7 +3,7 @@ package apiservices.echovibesapp.models.artist;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "artist")
+@Table(name = "artists")
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

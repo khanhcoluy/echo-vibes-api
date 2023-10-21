@@ -15,20 +15,18 @@ public class FileUploadServiceImp implements FileUploadService {
     }
 
     @Override
-    public void uploadFile(MultipartFile file) {
+    public void uploadFile(MultipartFile file, String title, Integer artistId, Integer albumId, Integer genreId) {
         try {
             String fileName = file.getOriginalFilename();
             String url = s3Service.uploadFile(fileName, file.getInputStream(), file.getSize());
 
-            // Extract song information (e.g., title, artist, album, genre, URL)
-//            String title = "";
-//            Artist artist = "...";
-//            Album album = ...;
-//            Genre genre = ...;
-//            String url = ...;
-
             // Create and save the song record
-            Song song = new Song("haha", url);
+            Song song = new Song();
+            song.setTitle(title);
+            song.setArtistId(artistId);
+            song.setAlbumId(albumId);
+            song.setGenreId(genreId);
+            song.setUrl(url);
             songService.save(song);
         } catch (Exception e) {
             // Handle exception (e.g., log it or throw a custom exception)
