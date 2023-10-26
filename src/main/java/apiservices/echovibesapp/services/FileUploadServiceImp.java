@@ -17,6 +17,9 @@ public class FileUploadServiceImp implements FileUploadService {
     @Override
     public void uploadFile(MultipartFile file, String title, Integer artistId, Integer albumId, Integer genreId) {
         try {
+            if (file.isEmpty()) {
+                throw new IllegalArgumentException("File is empty");
+            }
             String fileName = file.getOriginalFilename();
             String url = s3Service.uploadFile(fileName, file.getInputStream(), file.getSize());
 
@@ -29,7 +32,7 @@ public class FileUploadServiceImp implements FileUploadService {
             song.setUrl(url);
             songService.save(song);
         } catch (Exception e) {
-            // Handle exception (e.g., log it or throw a custom exception)
+            throw new RuntimeException("File upload failed: " + e.getMessage(), e);
         }
     }
 }

@@ -1,7 +1,5 @@
 package apiservices.echovibesapp.models.song;
 
-import apiservices.echovibesapp.models.album.Album;
-import apiservices.echovibesapp.models.artist.Artist;
 import jakarta.persistence.*;
 
 @Entity

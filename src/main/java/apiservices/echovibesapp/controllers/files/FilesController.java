@@ -1,4 +1,4 @@
-package apiservices.echovibesapp.controllers;
+package apiservices.echovibesapp.controllers.files;
 
 import apiservices.echovibesapp.services.FileUploadService;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class FilesController {
             }
             return ResponseEntity.ok("File uploaded successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File upload failed: " + e.getMessage());
         }
     }
 }
