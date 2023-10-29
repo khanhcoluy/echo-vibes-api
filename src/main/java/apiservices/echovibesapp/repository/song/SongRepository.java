@@ -1,4 +1,4 @@
-package apiservices.echovibesapp.repository;
+package apiservices.echovibesapp.repository.song;
 
 import apiservices.echovibesapp.models.song.Song;
 import org.springframework.data.jpa.repository.JpaRepository;

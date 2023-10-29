@@ -1,4 +1,4 @@
-package apiservices.echovibesapp.repository;
+package apiservices.echovibesapp.repository.user;
 
 import apiservices.echovibesapp.models.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

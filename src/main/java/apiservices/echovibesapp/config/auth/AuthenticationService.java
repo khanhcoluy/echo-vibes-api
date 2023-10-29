@@ -2,7 +2,7 @@ package apiservices.echovibesapp.config.auth;
 
 import apiservices.echovibesapp.models.user.Role;
 import apiservices.echovibesapp.models.user.User;
-import apiservices.echovibesapp.repository.UserRepository;
+import apiservices.echovibesapp.repository.user.UserRepository;
 import apiservices.echovibesapp.security.JwtService;
 import apiservices.echovibesapp.services.exception.EmailAlreadyExistsException;
 import lombok.RequiredArgsConstructor;

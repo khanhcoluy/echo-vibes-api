@@ -1,7 +1,7 @@
 package apiservices.echovibesapp.services;
 
 import apiservices.echovibesapp.models.song.Song;
-import apiservices.echovibesapp.repository.SongRepository;
+import apiservices.echovibesapp.repository.song.SongRepository;
 import org.springframework.stereotype.Service;
 
 @Service
